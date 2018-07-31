@@ -110,6 +110,7 @@ void Server::s_epoll_wait() {
             if ((n = read(sockFd, &msgPkg, (size_t) sizeof(struct MessagePackage))) < 0) {
                 if (errno == ECONNRESET) {
                     close(sockFd);
+                    this->deleteClientData(sockFd);
                     this->events[i].data.fd = -1;
                 } else {
                     std::cout << "[Server::s_epoll_wait()] read data error" << std::endl;
