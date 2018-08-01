@@ -215,15 +215,15 @@ void Server::scanAndKickOff() {
 }
 
 void Server::deleteClientData(int sockFd) {
-    std::map<int, ClientInfo>::iterator it;
-    it = this->onlineList.find(sockFd);
-    if (it != this->onlineList.end()) {
-        this->onlineList.erase(it);
+    std::map<int, ClientInfo>::iterator it_onlineList;
+    it_onlineList = this->onlineList.find(sockFd);
+    if (it_onlineList != this->onlineList.end()) {
+        this->onlineList.erase(it_onlineList);
     }
 
-    std::map<int, MessagePackage>::iterator it1;
-    it1 = this->sendMessagePackageList.find(sockFd);
-    if (it1 != this->sendMessagePackageList.end()) {
-        this->sendMessagePackageList.erase(sockFd);
+    std::map<int, MessagePackage>::iterator it_sendMessagePackageList;
+    it_sendMessagePackageList = this->sendMessagePackageList.find(sockFd);
+    if (it_sendMessagePackageList != this->sendMessagePackageList.end()) {
+        this->sendMessagePackageList.erase(it_sendMessagePackageList);
     }
 }
